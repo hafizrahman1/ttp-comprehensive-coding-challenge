@@ -2,14 +2,14 @@ Definitely, using a hash is a solution of this problem. As we notice that most o
 
 To make this idea even further, if we can separate out the shared prefixes recursively and make the prefix just one character, our solution can be even more efficient.
 
-##Solution
+**Solution**
 
 We can use a trie data structure to solve the problem. A trie is a tree data structure used for storing collection of strings. If two strings have a common prefix then they will have a same ancestor in the tree. Trie is a ideal data structure for storing our dictionary. Trie can also be used to do prefix based search and we can sort the strings lexographically in the trie.
 
-Let's make visited a nested hash where each map has keys of just one character. So we will store 'google.com' as visited['g'] ['o'] ['o'] ['g'] ['l'] ['e'] ['.'] ['c'] ['o'] ['m'] [*] = true.
-The '*' at the end means 'this is the end of an entry. This is just for distinguising a prefix and real URL in the visited hash. In the above example 'google.com' is a prefix. so if we add 'google.com/maps' to visited, we only have to add the characters '/maps', because 'google.com' is already saved as prefix. Same rule can be applied to 'google.com/about/jobs'
+Let's make visited a nested hash where each map has keys of just one character. So we will store 'google.com' as visited['g'] ['o'] ['o'] ['g'] ['l'] ['e'] ['.'] ['c'] ['o'] ['m'] ['*'] = true.
+The ['*'] at the end means this is the end of an entry. This is just for distinguising a prefix and real URL in the visited hash. In the above example 'google.com' is a prefix. so if we add 'google.com/maps' to visited, we only have to add the characters '/maps', because 'google.com' is already saved as prefix. Same rule can be applied to 'google.com/about/jobs'
 
-##Complexity
+**Complexity**
 
 When we consider complexity we always think about how much space does this save? For the flat hash approach, we can calculate how many characters we were storing. If we think our visited includes all possible URL's of length 5 or fewer characters and we will ignore the non-alphabetical characters for simplicity. There are 26^5 different possible 5-character URLs. If we store each 5-character URL as a normal string in memory, we are storing 5 characters per string for a total of 5 * 26^5 characters for all possible 5-character strings. So for all 1,2,3,4, or 5 character URLs, our total number of characters stored is:
 
